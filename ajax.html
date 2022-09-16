@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button onclick="fetch">fetch Document</button>
+    <br><br>
+    <div id="text">
+
+
+    </div>
+    <script>
+      document.querySelector("button").addEventListener("click", fetch);
+      console.log("working");
+      function fetch() {
+          var xhr = new XMLHttpRequest();
+          console.log(xhr.readyState);
+          document.querySelector('#text').innerHTML='<img src="#" alt="" height="109" width="109" style="background-color: #cecece;">';
+        xhr.open("GET", "https://jsonplaceholder.typicode.com/todos/1",true);
+
+        console.log(xhr.readyState);
+        xhr.onload = ({ target: res }) => {
+          if (res.status == 200) {
+            document.querySelector('#text').innerText=res.responseText;
+        
+        }
+    };
+    xhr.onprogress=({target:res})=>{
+           
+            console.log(res.readyState);
+        }   
+
+         xhr.onreadystatechange=({target:res})=>{
+            console.log(res.readyState);
+         }
+        //console.log("testing");
+        //console.log("testing");
+        xhr.send();
+      }
+    </script>
+  </body>
+</html>
